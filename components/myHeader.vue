@@ -384,9 +384,9 @@
     }
 
     @media(max-width:1080px){
-        /*nav .nav-list>li>a{*/
-            /*margin-right:0;*/
-        /*}*/
+        nav .nav-list>li>a{
+            margin-right:0;
+        }
 
         nav .nav-list>li>a>i {
             display: block;
