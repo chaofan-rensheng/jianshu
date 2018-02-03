@@ -2,6 +2,14 @@
 *{
     box-sizing: border-box;
 }
+/*清除浮动*/
+.clearfix:after{
+    content:'';
+    display: inline-block;
+    clear:both;
+    height:0;
+    visibility: hidden;
+}
 html,body{
     height:100%;
     background-color:white;
@@ -55,6 +63,11 @@ img{
 @media (max-width:1080px){
     .my-container{
         width:750px !important;
+    }
+}
+@media(max-width:750px){
+    body{
+        overflow-x: hidden;
     }
 }
 /******************首页布局******************************/
@@ -354,6 +367,11 @@ footer .footer-info{
     padding-top:20px;
     padding-bottom:40px;
 }
+@media (max-width:785px){
+    .note .post{
+        margin:0 74px;
+    }
+}
 .note .post .artical .title{
     font-size:34px;
     font-weight:700;
@@ -601,8 +619,84 @@ footer .footer-info{
 .note .post .artical .meta-bottom .share-group  .shareBox li:hover{
     background-color:#f5f5f5;
 }
-
 .note .post .artical .meta-bottom .share-group  .showShare span{
     margin-left:5px;
 }
+
+/*评论区域的样式*/
+.comment-placeholder{
+    padding:20px 0px 30px;
+}
+.comment-placeholder .author{
+    margin-bottom:15px;
+}
+.comment-placeholder .author .avatar{
+    background-color:#eaeaea;
+    border-radius:50%;
+}
+.comment-placeholder .author .info{
+    display: inline-block;
+}
+.comment-placeholder .author .info .name{
+    width:60px;
+    height:15px;
+    margin-bottom:6px;
+    background-color:#eaeaea;
+}
+.comment-placeholder .author .info .meta{
+    width:120px;
+    height:12px;
+    background-color:#eaeaea;
+}
+.comment-placeholder .title{
+    width:100%;
+    height:16px;
+    background-color:#eaeaea;
+    margin-bottom:8px;
+    animation: loading 1s ease-in-out infinite;
+}
+.comment-placeholder .animated-delay{
+    animation:loading 1s ease-in-out -.5s infinite;
+}
+@keyframes loading {
+    0%{
+        width:60%;
+    }
+    50%{
+        width:100%;
+    }
+    100%{
+        width:60%;
+    }
+
+}
+@keyframes shortLoading {
+    0% {
+        width: 20%
+    }
+
+    50% {
+        width: 40%
+    }
+
+    to {
+        width: 20%
+    }
+}
+.comment-placeholder .tool-group{
+    font-size:15px;
+    color:#eaeaea;
+    padding-top:6px;
+}
+.comment-placeholder .tool-group i{
+    margin-right:5px;
+}
+.comment-placeholder .tool-group div{
+    height:14px;
+    width:40px;
+    margin-right:10px;
+    display: inline-block;
+    background:#eaeaea;
+}
+
 

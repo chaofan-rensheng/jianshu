@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "animate.css": "^3.5.2",
     "axios": "^0.16.2",
     "bootstrap": "4.0.0-beta.2",
     "bootstrap-vue": "^1.4.1",
@@ -21,8 +22,10 @@
     "normalize.css": "^7.0.0",
     "nuxt": "^1.0.0-rc3",
     "source-map-support": "^0.4.15",
+    "v-tooltip": "^2.0.0-rc.30",
     "vue-awesome-swiper": "^3.1.2",
-    "vue-concise-slider": "^2.4.4"
+    "vue-concise-slider": "^2.4.4",
+    "vue-server-renderer": "^2.5.13"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
