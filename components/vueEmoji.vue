@@ -16,7 +16,7 @@
 <script>
     import data from '~/server/data/emoji-data.js'
     export default{
-//        name:'vueEmoji',
+        name:'vueEmoji',
         data(){
             return{
                 emojiData:data,

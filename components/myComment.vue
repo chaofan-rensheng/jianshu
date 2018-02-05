@@ -32,7 +32,7 @@
                     <span>25条评论</span>
                     <a class="author-only" href="javascript:void(0)">只看作者</a>
                     <div class="pull-right">
-                        <a class="active" href="javascript:void(0)">按喜欢排序</a>
+                        <a class="active" href="javascript:void(0)" @click="likeSort()">按喜欢排序</a>
                         <a href="javascript:void(0)">按时间正序</a>
                         <a href="javascript:void(0)">按时间倒序</a>
                     </div>
@@ -91,11 +91,11 @@
                         <div class="comment-wrap">
                             <p>{{comment.compiled_content}}</p>
                             <div class="tool-group">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-thumbs-o-up"></i>
+                                <a href="javascript:void(0)" @click="likeClick(comment.id,index)">
+                                    <i class="fa fa-thumbs-o-up" :id="'like'+comment.id"></i>
                                     <span>{{comment.likes_count}}人点赞</span>
                                 </a>
-                                <a href="javascript:void(0)">
+                                <a href="javascript:void(0)" @click="showAdd(comment.id)">
                                     <i class="fa fa-comment-o"></i>
                                     <span>回复</span>
                                 </a>
@@ -110,17 +110,39 @@
                             </p>
                             <div class="sub-tool-group">
                                 <span>{{subComment.create_at|formatDate}}</span>
-                                <a href="javascript:void(0)">
+                                <a href="javascript:void(0)" @click="secondReply(subComment.user.nick_name,comment.id,subComment.id,index)">
                                     <i class="fa fa-comment-o"></i>
                                     <span>回复</span>
                                 </a>
                             </div>
                         </div>
                         <div class="more-comment">
-                            <a href="javascript:void(0)" class="add-comment-btn">
+                            <a href="javascript:void(0)" class="add-comment-btn" @click="showAddNew(comment.id)" >
                                 <i class="fa fa-pencil"></i>
-                                <span>添加新评论</span>
+                                <span ref="newPingLun">添加新评论</span>
                             </a>
+                        </div>
+                        <div class="addNew-comment" :id="comment.id">
+                            <form class="new-comment">
+                                <textarea @focus="" placeholder="请写下你的评论" :id="'textarea'+comment.id"></textarea>
+                                <transition :duration="200"  name="fade">
+                                    <div v-if="" class="write-function-block clearfix">
+                                        <div class="emoji-modal-wrap">
+                                            <a href="javascript:void(0)" class="emoji" @click="showEmojiModal(comment.id)">
+                                                <i class="fa fa-smile-o"></i>
+                                            </a>
+                                            <transition  name="fade">
+                                                <div class="emoji-modal arrow-up" :id=" 'showEmoji-'+comment.id">
+                                                    <vue-emoji @select="selectEmoji"></vue-emoji>
+                                                </div>
+                                            </transition>
+                                        </div>
+                                        <div class="hint">Ctrl+Enter 发表</div>
+                                        <a href="javascript:void(0)" class="btn btn-send" @click="sendDate">发送</a>
+                                        <a href="javascript:void(0)" class="cancel" @click="send=false">取消</a>
+                                    </div>
+                                </transition>
+                            </form>
                         </div>
                     </div>
 
@@ -137,7 +159,7 @@
             return{
                 send:false,
                 showEmoji:false,
-                value:'',
+                value:[],
                 comments:[
                     {
                         id:19935725,
@@ -226,7 +248,7 @@
                         id:20005111,
                         floor: 4,
                         like:false,
-                        likes_count:4,
+                        likes_count:5,
                         note_id:23234112,
                         user_id:10211255,
                         user:{
@@ -253,7 +275,12 @@
                         ]
                     }
                 ],
-                msg:'这是hover信息系'
+                msg:'这是hover信息系',
+                oldId:[],
+                aaaa:false,
+                bbbb:false,
+                cccc:false,
+                ffff:[]
             }
         },
         components:{
@@ -261,11 +288,94 @@
         },
         methods:{
             selectEmoji(code){
+                console.log(event.path)
+                var aaid = event.path[event.path.length - 14].id
                 this.showEmoji = false;
-                this.value += code;
+                var textAreasqq = document.getElementById('textarea'+aaid.toString().split('-')[1])
+                textAreasqq.innerHTML +=code
             },
             sendDate(){
                 console.log('发送value值的数据给后端')
+            },
+            //排序
+            likeSort(){
+                console.log(this.comments)
+                for(var x = 0;x<this.comments.length-1;x++){
+                    for(var y = 0;y<this.comments.length-1-x;y++){
+                        if(this.comments[y].likes_count > this.comments[y+1].likes_count){
+                           var max = this.comments[y];
+                            this.comments[y] = this.comments[y+1]
+                            this.comments[y+1] = max
+                            console.log(max.likes_count)
+                        }
+                    }
+                }
+                console.log(this.comments)
+            },
+            //点赞
+            likeClick(value,value1){
+                var likeDome = document.getElementById('like'+value)
+                if(likeDome.className == 'fa fa-thumbs-o-up'){
+                    likeDome.style.color = '#ea6f5a'
+                    likeDome.className = 'fa fa-thumbs-up'
+                    ++this.comments[value1].likes_count
+                }else{
+                    likeDome.className = 'fa fa-thumbs-o-up'
+                    likeDome.style.color = '#969696'
+                    --this.comments[value1].likes_count
+                }
+            },
+            //显示表情
+            showEmojiModal(value){
+                var showEmojiMode = document.getElementById('showEmoji-'+value)
+                if(   showEmojiMode.style.display != 'block'){
+                    showEmojiMode.style.display = 'block'
+                }else{
+                    showEmojiMode.style.display = 'none'
+                }
+            },
+            //一级回复
+            showAdd(num){
+                var showDome = document.getElementById(num)
+                var textAreas = document.getElementById('textarea'+num)
+                textAreas.innerHTML = ''
+                if(   showDome.style.display != 'block' || this.bbbb == true || this.cccc == true){
+                    showDome.style.display = 'block'
+                    this.aaaa = true
+                    this.bbbb = false
+                    this.cccc = false
+                }else{
+                    showDome.style.display = 'none'
+                }
+            },
+            //添加新评论
+            showAddNew(num){
+                var showDome = document.getElementById(num)
+                var textAreas = document.getElementById('textarea'+num)
+                textAreas.innerHTML = ''
+                if(   showDome.style.display != 'block' || this.aaaa == true || this.cccc == true){
+                    showDome.style.display = 'block'
+                    this.aaaa = false
+                    this.bbbb = true
+                    this.cccc = false
+                }
+                else{
+                    showDome.style.display = 'none'
+                }
+            },
+            //二级回复
+            secondReply(value,value1,value3,value4){
+                this.oldId.push(value3)
+                var showDome = document.getElementById(value1)
+                if(   showDome.style.display != 'block' || (this.oldId[this.oldId.length-1] != this.oldId[this.oldId.length-2]) || this.aaaa == true){
+                    showDome.style.display = 'block'
+                    this.aaaa = false;
+                    this.cccc = true
+                }else {
+                    showDome.style.display = 'none'
+                }
+                var textArea = document.getElementById('textarea'+value1)
+                textArea.innerHTML = '@' + value
             }
         }
     }
@@ -480,12 +590,20 @@
     .note .post .comment-list .more-comment{
         font-size:14px;
         color:#969696;
+        padding-bottom:15px!important;
+        margin-bottom:15px!important;
     }
     .note .post .comment-list .more-comment a:hover{
         color: #333333 !important;
     }
     .note .post .comment-list .more-comment i{
         margin-right:5px;
+    }
+    .note .post .comment-list .addNew-comment{
+        display: none;
+    }
+    .note .post .comment-list .addNew-comment .new-comment{
+        margin-left:0;
     }
 
 </style>
