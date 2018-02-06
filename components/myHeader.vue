@@ -76,13 +76,13 @@
                             <div class="drop-menu" v-show="notifyShow">
                                 <ul>
                                     <li>
-                                        <nuxt-link to="/">
+                                        <nuxt-link to="/message/comments">
                                             <i class="fa fa-comment-o"></i>
                                             评论
                                         </nuxt-link>
                                     </li>
                                     <li>
-                                        <nuxt-link to="/">
+                                        <nuxt-link to="/message/chats">
                                             <i class="fa fa-envelope-o"></i>
                                             简信
                                         </nuxt-link>
