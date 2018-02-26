@@ -15,7 +15,7 @@ html,body{
     background-color:white;
     color:#333;
 }
-#__nuxt{
+    #__nuxt{
     height:100%;
 }
 
@@ -699,4 +699,183 @@ footer .footer-info{
     background:#eaeaea;
 }
 
+/*个人主页样式*/
+.person .row{
+    padding-top:30px;
+}
+.person .main .main-top{
+    margin-bottom:20px;
+}
+.person .main .main-top .avatar{
+    display: inline-block;
+    width:80px;
+    height:80px;
+    float:left;
+    margin-left:-2px;
+}
+.person .main .main-top .title{
+    padding:5px 0px 0px 100px;
+}
+.person .main .main-top .title .name{
+    display: inline-block;
+    font-size:21px;
+    font-weight:700;
+    vertical-align: middle;
+}
+.person .main .main-top .info{
+    margin-top:5px;
+    padding:0px 0px 0px 100px;
+    font-size:14px;
+}
+.person .main .main-top .info ul li{
+    display: inline-block;
+}
+.person .main .main-top .info ul li .meta-block{
+    font-size:14px;
+    margin:0px 7px 6px 0px;
+    padding:0px 7px 0px 0px;
+    border-right:1px solid #f0f0f0;
+    color:#969696;
+}
+.person .main .main-top .info ul li .meta-block p{
+    margin-bottom:0;
+    color:black;
+}
+.person .main .person-menu{
+    border-bottom:1px solid #f0f0f0;
+}
+.person .main .person-menu li{
+    height:100%;
+    display: inline-block;
+    position: relative;
+    padding:8px 0px;
+    margin-bottom:-8px;
+    line-height:20px;
+    overflow: hidden;
+}
+.person .main .person-menu li.active{
+    border-bottom:2px solid #646464;
+}
+.person .main .person-menu li.active .bottomLine{
+    display: none;
+}
+.person .main .person-menu li.active a{
+    color:#646464 !important;
+}
+.person .main .person-menu li a{
+    padding:13px 20px;
+    font-size:15px;
+    font-weight:700;
+    line-height:25px;
+    color:#969696 !important;
+}
+.person .main .person-menu li a:hover{
+    color:#646464 !important;
+}
+.person .main .person-menu li i{
+    display: inline-block;
+    margin-right:15px;
+    font-size:17px;
+}
+.person .main .person-menu li .bottomLine{
+    position: absolute;
+    bottom:0px;
+    left:50%;
+    width:5%;
+    border-bottom:2px solid #646464;
+    opacity: 0;
+    transition:all .3s linear;
+}
+.person .main .person-menu li:hover .bottomLine{
+    transform: scale(30,1);
+    opacity: 1;
+}
+.person .aside{
+    width:280px;
+    margin-left:30px;
+}
+.person .aside .title{
+    float:left;
+    margin-bottom:10px;
+    font-size:14px;
+    color:#969696;
+}
+.person .aside .edit{
+    float:right;
+    font-size:13px;
+    color:#969696 !important;
+}
+.person .aside textarea{
+    text-indent: 10px;
+    width:100%;
+    height:125px;
+    margin-bottom:5px;
+    paddding:5px 10px;
+    font-size:14px;
+    background-color: hsla(0,0%,71%,.1);
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    resize: none;
+    outline: none;
+}
+.person .aside form .save{
+    width:70px;
+    height:31px;
+    line-height:25px;
+    padding:0px 15px;
+    color:#76d461;
+    text-align: center;
+    border:1px solid #76d461;
+    border-radius:15px;
+    display: inline-block;
+}
+.person .aside form .save:hover{
+    background:#f5fcf3;
+}
+.person .aside form .cancel{
+    display: inline-block;
+    margin-left:10px;
+    font-size:14px;
+    line-height:34px;
+    color:#969696;
+    cursor:pointer;
+}
+.person .aside form .cancel:hover{
+    color:black;
+}
+.person .aside .list{
+    margin-bottom:16px;
+    border-bottom:1px solid #f0f0f0;
+    clear:both;
+}
+.person .aside .list li{
+    margin-bottom:10px;
+    line-height:20px;
+}
+.person .aside .list li a{
+    font-size:14px;
+    color:#333 !important;
+    line-height:30px;
+}
+.person .aside .list li i{
+    margin-right:10px;
+    font-size:20px;
+}
+.person .aside div .title{
+    float: left;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #969696;
+}
+.person .aside div .plus{
+    float:right;
+    font-size: 13px;
+    color: #42c02e !important;
+}
+.person .aside div .list img{
+    width:32px;
+    height:32px;
+    border-radius:5px;
+    margin-right:10px;
+}
 

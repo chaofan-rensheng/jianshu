@@ -5,41 +5,41 @@
                 <!--logo-->
                 <nuxt-link class="nav-logo" to="/"><img src="../assets/img/nav-logo.png" alt=""></nuxt-link>
                 <!--写文章-->
-                <nuxt-link to="create" class=" btn write-btn">
+                <nuxt-link to="/" class="btn write-btn">
                     <i class="fa fa-edit"></i>写文章
                 </nuxt-link>
                 <!--登录和注册按钮-->
                 <nuxt-link to="/sign-up" class="btn sign-up">注册</nuxt-link>
                 <nuxt-link to="/sign-in" class="btn sign-in">登录</nuxt-link>
                 <!--如果用户登录，那么显示用户头像-->
-                <div style="display:none" class="user"  @mouseover="userShow=true" @mouseleave="userShow=false">
+                <div style="display:block" class="user"  @mouseover="userShow=true" @mouseleave="userShow=false">
                     <div class="drop-down">
-                        <nuxt-link class="avatar" to="users">
+                        <nuxt-link class="avatar" to="/">
                             <img src="../assets/img/touxiang.jpg" alt="">
                         </nuxt-link>
                     </div>
                     <div class="drop-menu" v-show="userShow">
                         <ul>
                             <li>
-                                <nuxt-link to="/">
+                                <nuxt-link to="/u/132">
                                     <i class="fa fa-home"></i>
                                     我的主页
                                 </nuxt-link>
                             </li>
                             <li>
-                                <nuxt-link to="/">
+                                <nuxt-link to="/bookmarks">
                                     <i class="fa fa-bookmark"></i>
                                     收藏的文章
                                 </nuxt-link>
                             </li>
                             <li>
-                                <nuxt-link to="/">
+                                <nuxt-link to="/note_like">
                                     <i class="fa fa-heart"></i>
                                     喜欢的文章
                                 </nuxt-link>
                             </li>
-                            <li>
-                                <nuxt-link to="/">
+                            <li >
+                                <nuxt-link to="/settings/basic">
                                     <i class="fa fa-cog"></i>
                                     设置
                                 </nuxt-link>
@@ -88,19 +88,19 @@
                                         </nuxt-link>
                                     </li>
                                     <li>
-                                        <nuxt-link to="/">
+                                        <nuxt-link to="/message/requests">
                                             <i class="fa fa-upload"></i>
                                             投稿请求
                                         </nuxt-link>
                                     </li>
                                     <li>
-                                        <nuxt-link to="/">
+                                        <nuxt-link to="/message/likes">
                                             <i class="fa fa-heart-o"></i>
                                             喜欢和赞
                                         </nuxt-link>
                                     </li>
                                     <li>
-                                        <nuxt-link to="/">
+                                        <nuxt-link to="/message/follows">
                                             <i class="fa fa-user-o"></i>
                                             关注
                                         </nuxt-link>
@@ -213,7 +213,7 @@
         height:40px;
         display: block;
         margin:8px 28px 8px 20px;
-  
+
     }
     nav .user:hover{
         background-color:#f5f5f5;
@@ -236,6 +236,8 @@
     nav .user .drop-menu{
         min-width:160px;
         position: absolute;
+        background-color:#fff;
+        /*z-index: 1000;*/
         left:0;
         box-shadow: 0 2px 8px rgba(0,0,0,.1);
         font-size:15px;
