@@ -53,7 +53,7 @@
                     </div>
                     <ul class="person-menu">
                         <li class="active" @click="name='artical'">
-                            <nuxt-link to="/u/123">
+                            <nuxt-link to="/u/123" @click="aa()">
                                 <i class="fa fa-file-text"></i>文章
                             </nuxt-link>
                             <div class="bottomLine"></div>
@@ -146,10 +146,10 @@
     export default{
         data(){
             return{
-                name:'artical',
                 name:'dynamic',
                 name:'newComments',
                 name:'hot',
+                name:'artical',
                 showTextarea:false
             }
         },
@@ -159,6 +159,11 @@
             dynamic,
             newComments,
             hot
+        },
+        methods:{
+            aa(){
+                console.log('fsdafasdf')
+            }
         }
     }
 </script>

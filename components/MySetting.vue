@@ -28,24 +28,9 @@ export default {
                 urlArr:[]
             }
         },
-    methods:{
-            changeColor(value){
-                console.log(value)
-                console.log(this.$route.path)
-                console.log(this.urlArr.push(this.$route.path))
-//                console.log(this.settings[value].url)
-                if(this.$route.path == this.settings[value].url){
-                    this.$refs.myset[value].className = 'asideCurrent'
-                }
-            }
-    }
 };
 </script>
 <style scoped>
-.asideCurrent{
-    background-color:#f0f0f0;
-    border-radius:4px;
-}
  li{
     line-height: 20px;
 }

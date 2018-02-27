@@ -878,4 +878,13 @@ footer .footer-info{
     border-radius:5px;
     margin-right:10px;
 }
+/*设置界面的点击添加背景*/
+.asideActive{
+    background-color:#f0f0f0;
+    border-radius:4px;
+}
+.asideCurrent{
+    background-color:#f0f0f0;
+    border-radius:4px;
+}
 

@@ -64,6 +64,10 @@
                   downList:false,
             }
         },
+        mounted() {
+            let chatsElement = document.querySelector(".chats .aside ul li:nth-of-type(2)");
+            chatsElement.className = "asideCurrent";
+        },
         components:{
             myHeader,
         }
@@ -90,10 +94,10 @@
         background-color:#f0f0f0;
         border-radius:4px;
     }
-    .chats li a.active{
-        background-color:#f0f0f0;
-        border-radius:4px;
-    }
+    /*.chats li a.active{*/
+        /*background-color:#f0f0f0;*/
+        /*border-radius:4px;*/
+    /*}*/
     .chats .main{
         width:625px;
     }

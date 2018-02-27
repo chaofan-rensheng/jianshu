@@ -73,7 +73,7 @@
                                     <i class="fa fa-thumbs-o-up" :id="'like'+comment.id"></i>
                                     <span>{{comment.likes_count}}人点赞</span>
                                 </a>
-                                <a href="javascript:void(0)" @click="showSubCommentForm(index)">
+                                <a href="javascript:void(0)" @click="showSubCommentForm(index,'top')">
                                     <i class="fa fa-comment-o"></i>
                                     <span>回复</span>
                                 </a>
@@ -88,14 +88,14 @@
                             </p>
                             <div class="sub-tool-group">
                                 <span>{{subComment.create_at|formatDate}}</span>
-                                <a href="javascript:void(0)" @click="showSubCommentAtName(nindex,index,subComment.user.nick_name)">
+                                <a href="javascript:void(0)" @click="showSubCommentFormAtName(index,subComment.id,subComment.user.nick_name)">
                                     <i class="fa fa-comment-o"></i>
                                     <span>回复</span>
                                 </a>
                             </div>
                         </div>
                         <div class="more-comment">
-                            <a href="javascript:void(0)" class="add-comment-btn" @click="showSubCommentForm(index)">
+                            <a href="javascript:void(0)" class="add-comment-btn" @click="showSubCommentForm(index,'bottom')">
                                 <i class="fa fa-pencil"></i>
                                 <span ref="newPingLun">添加新评论</span>
                             </a>
@@ -129,6 +129,7 @@
     </div>
 </template>
 <script>
+    import Vue from 'vue'
     import vueEmoji from '~/components/vueEmoji'
     export default{
         name:'myComment',
@@ -255,7 +256,8 @@
                 activeIndex:[],
                 emojiIndex:[],
                 subCommentList:[],
-                oldIndex:null
+                commentFormState:[],
+                commentId:null
             }
         },
         components:{
@@ -285,36 +287,51 @@
             sendDate(){
                 console.log('测试数据是否发送')
             },
-            showSubCommentForm(value){
-                if(this.activeIndex.includes(value)){
-                    let index = this.activeIndex.indexOf(value);
-                    //关闭评论框
-                    this.activeIndex.splice(index,1);
-                }else{
-                    //清除表单里面的内容
-                    this.subCommentList[value] = '';
-                    //将表情关掉
-                    this.emojiIndex = [];
-                    //打开评论框
-                    this.activeIndex.push(value);
-                }
-            },
-            showSubCommentAtName(nvalue,value,name){
-                if(this.oldIndex == nvalue){
-                    this.oldIndex = null
-                    //第二次点击
-                    let index = this.activeIndex.indexOf(value);
-                    //关闭评论框
-                    this.activeIndex.splice(index,1);
-                }else{
-                    //第一次点击
-                    if(!this.activeIndex.includes(value)){
-                        this.activeIndex.push(value);
+            showSubCommentForm(index,position){
+                this.commentId = null;
+                if(!this.activeIndex.includes(index)){
+                    //每次打开的时候清空输入框中内容
+                    this.subCommentList[index] = ''
+                    //第一次点击，总是显示
+                    this.activeIndex.push(index);
+                    //记录当前点击的下标以及位置
+                    this.commentFormState[index] = position;
+                }else if(this.activeIndex.includes(index)){
+                    Vue.set(this.subCommentList,index,'')
+                    if(this.commentFormState[index] !== position){
+                        //点的是另外一个
+                        this.commentFormState[index] = position;
+                        //聚焦一下
+                        let num = this.activeIndex.indexOf(index);
+                        this.$refs.content[num].focus();
+                    }else{
+                        //点的是同一个,将它隐藏掉
+                        this.activeIndex.splice(this.activeIndex.indexOf(index),1)
+                        this.commentFormState[index] = '';
                     }
-                    this.emojiIndex = [];
-                    this.subCommentList[value] = ''
-                    this.subCommentList[value] += `@${name}`;
-                    this.oldIndex = nvalue;
+                }
+
+            },
+            showSubCommentFormAtName(index,id,name){
+                this.commentFormState[index] = []
+                if(this.activeIndex.includes(index)){
+                    if(this.commentId == id){
+                        //隐藏
+                        this.activeIndex.splice(this.activeIndex.indexOf(index),1)
+                        Vue.set(this.subCommentList,index,'')
+                        this.commentId = null;
+                    }else{
+                        //聚焦一下
+                        let num = this.activeIndex.indexOf(index);
+                        this.$refs.content[num].focus();
+                    }
+                    //表单已经显示
+                    Vue.set(this.subCommentList,index,'@'+ name +' ')
+                    this.commentId = id  //记录上一次点多的ID值
+                }else{
+                    //表单没有显示出来
+                    Vue.set(this.subCommentList,index,'@' + name + ' ')
+                    this.activeIndex.push(index);
                 }
             },
             showSubEmoji:function(value){

@@ -6,7 +6,7 @@
                 <div class="row" style="padding:30px 0;">
                     <div class="aside">
                     <ul>
-                        <li><nuxt-link to="/message/comments" class="active">评论</nuxt-link></li>
+                        <li><nuxt-link to="/message/comments">评论</nuxt-link></li>
                         <li><nuxt-link to="/message/chats">简信</nuxt-link></li>
                         <li><nuxt-link to="/message/requests">投稿请求</nuxt-link></li>
                         <li><nuxt-link to="/message/likes">喜欢和赞</nuxt-link></li>
@@ -86,6 +86,10 @@
 
             }
         },
+        mounted() {
+            let commentsElement = document.querySelector(".comments .aside ul li");
+            commentsElement.className = "asideCurrent";
+        },
         components:{
             myHeader,
         }
@@ -112,10 +116,10 @@
         background-color:#f0f0f0;
         border-radius:4px;
     }
-    .comments .aside li a.active{
-        background-color:#f0f0f0;
-        border-radius:4px;
-    }
+    /*.comments .aside li a.active{*/
+        /*background-color:#f0f0f0;*/
+        /*border-radius:4px;*/
+    /*}*/
     .comments .main {
         width:625px;
     }
