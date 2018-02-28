@@ -6,7 +6,7 @@
                 <nuxt-link class="avatar" to="/u/123">
                     <img src="../assets/img/commend4.jpg" alt="">
                 </nuxt-link>
-                <textarea @focus="send=true" placeholder="请写下你的评论" v-model="value"></textarea>
+                <textarea  @focus="send=true" v-focus="emojiFocus" @blur="emojiFocus = false" placeholder="请写下你的评论" v-model="value"></textarea>
                 <transition :duration="200"  name="fade">
                     <div v-if="send" class="write-function-block clearfix">
                         <div class="emoji-modal-wrap" >
@@ -21,7 +21,7 @@
                         </div>
                         <div class="hint">Ctrl+Enter 发表</div>
                         <a href="javascript:void(0)" class="btn btn-send" @click="sendDate">发送</a>
-                        <a href="javascript:void(0)" class="cancel" @click="send=false">取消</a>
+                        <a href="javascript:void(0)" class="cancel" @click="send=false;value=''">取消</a>
                     </div>
                 </transition>
             </form>
@@ -69,11 +69,11 @@
                         <div class="comment-wrap">
                             <p>{{comment.compiled_content}}</p>
                             <div class="tool-group">
-                                <a href="javascript:void(0)">
-                                    <i class="fa fa-thumbs-o-up" :id="'like'+comment.id"></i>
-                                    <span>{{comment.likes_count}}人点赞</span>
+                                <a href="javascript:void(0)" @click="commentLike(index)" class=" zan-animation">
+                                    <i class="fa" :class="comment.like ? 'fa-thumbs-up liked':'fa-thumbs-o-up'" :id="'like'+comment.id"></i>
+                                    <span  :class="comment.like ? 'rel-like' : ''">{{comment.likes_count}}人点赞</span>
                                 </a>
-                                <a href="javascript:void(0)" @click="showSubCommentForm(index,'top')">
+                                <a href="javascript:void(0)" @click="showSubCommentForm(index,'top','')">
                                     <i class="fa fa-comment-o"></i>
                                     <span>回复</span>
                                 </a>
@@ -88,14 +88,14 @@
                             </p>
                             <div class="sub-tool-group">
                                 <span>{{subComment.create_at|formatDate}}</span>
-                                <a href="javascript:void(0)" @click="showSubCommentFormAtName(index,subComment.id,subComment.user.nick_name)">
+                                <a href="javascript:void(0)" @click="showSubCommentForm(index,subComment.id,subComment.user.nick_name)">
                                     <i class="fa fa-comment-o"></i>
                                     <span>回复</span>
                                 </a>
                             </div>
                         </div>
                         <div class="more-comment">
-                            <a href="javascript:void(0)" class="add-comment-btn" @click="showSubCommentForm(index,'bottom')">
+                            <a href="javascript:void(0)" class="add-comment-btn" @click="showSubCommentForm(index,'bottom','')">
                                 <i class="fa fa-pencil"></i>
                                 <span ref="newPingLun">添加新评论</span>
                             </a>
@@ -103,7 +103,7 @@
                         <!--要显示的表单-->
                         <transition :duration="200"  name="fade">
                             <form class="new-comment" v-if="activeIndex.includes(index)" style="margin-left:0">
-                                <textarea v-focus placeholder="写下你的评论" v-model="subCommentList[index]" ref="content"></textarea>
+                                <textarea v-focus="commentFormState[index]" @blur="commentFormState[index] = false" placeholder="写下你的评论" v-model="subCommentList[index]" ref="content"></textarea>
                                     <div v-if="" class="write-function-block clearfix">
                                         <div class="emoji-modal-wrap">
                                             <a href="javascript:void(0)" class="emoji" @click="showSubEmoji(index)">
@@ -138,6 +138,7 @@
                 send:false,
                 showEmoji:false,
                 value:'',
+                likeButton:false,
                 comments:[
                     {
                         id:19935725,
@@ -256,8 +257,9 @@
                 activeIndex:[],
                 emojiIndex:[],
                 subCommentList:[],
+                emojiFocus:false,
                 commentFormState:[],
-                commentId:null
+                commentId:[],  //里面存放每一个留言列表中的上一个点击的ID值
             }
         },
         components:{
@@ -270,12 +272,21 @@
             "focus": {
                 // 钩子函数：bind inserted update componentUpdated unbind
                 // 钩子函数的参数：el，binding，vnode，oldVnode
-                bind:function(el,binding,vnode,oldVnode){
-                    el.focus();
+                bind:function(el,{value}){
+                    if(value){
+                        el.focus();
+                    }
                 },
-                inserted: function (el) {
+                inserted: function (el,{value}) {
                     // 聚焦元素
-                    el.focus()
+                    if(value){
+                        el.focus()
+                    }
+                },
+                update:function(el,{value}){
+                    if(value){
+                        el.focus()
+                    }
                 }
             }
         },
@@ -283,55 +294,34 @@
             selectEmoji(code){
                 this.showEmoji = false;
                 this.value += code
+                this.emojiFocus = true
             },
             sendDate(){
                 console.log('测试数据是否发送')
             },
-            showSubCommentForm(index,position){
-                this.commentId = null;
-                if(!this.activeIndex.includes(index)){
-                    //每次打开的时候清空输入框中内容
-                    this.subCommentList[index] = ''
-                    //第一次点击，总是显示
-                    this.activeIndex.push(index);
-                    //记录当前点击的下标以及位置
-                    this.commentFormState[index] = position;
-                }else if(this.activeIndex.includes(index)){
-                    Vue.set(this.subCommentList,index,'')
-                    if(this.commentFormState[index] !== position){
-                        //点的是另外一个
-                        this.commentFormState[index] = position;
-                        //聚焦一下
-                        let num = this.activeIndex.indexOf(index);
-                        this.$refs.content[num].focus();
-                    }else{
-                        //点的是同一个,将它隐藏掉
-                        this.activeIndex.splice(this.activeIndex.indexOf(index),1)
-                        this.commentFormState[index] = '';
-                    }
-                }
-
-            },
-            showSubCommentFormAtName(index,id,name){
-                this.commentFormState[index] = []
-                if(this.activeIndex.includes(index)){
-                    if(this.commentId == id){
-                        //隐藏
-                        this.activeIndex.splice(this.activeIndex.indexOf(index),1)
-                        Vue.set(this.subCommentList,index,'')
-                        this.commentId = null;
-                    }else{
-                        //聚焦一下
-                        let num = this.activeIndex.indexOf(index);
-                        this.$refs.content[num].focus();
-                    }
-                    //表单已经显示
-                    Vue.set(this.subCommentList,index,'@'+ name +' ')
-                    this.commentId = id  //记录上一次点多的ID值
+            showSubCommentForm(index,id,name){
+                let ID = id.toString()
+                if(this.commentId[index] == ID){
+                    //点两次
+                    this.activeIndex.splice(this.activeIndex.indexOf(index),1)
+                    this.commentId[index] = ''
                 }else{
-                    //表单没有显示出来
-                    Vue.set(this.subCommentList,index,'@' + name + ' ')
-                    this.activeIndex.push(index);
+                    //清掉表单中的内容
+                    this.subCommentList[index] = ''
+                    //表情关掉
+                    this.emojiIndex = []
+                    //点一次
+                    if(!this.activeIndex.includes(index)){
+                        this.activeIndex.push(index);
+                    }
+                    //判断用户名是否存在，如果存在添加
+                    if(name != ''){
+                        this.subCommentList[index] = `@${name}`
+                    }
+                    //存一下上一个回复列表对应点击的按钮
+                    this.commentId[index] = ID
+                    //聚焦元素
+                    this.commentFormState[index] = true
                 }
             },
             showSubEmoji:function(value){
@@ -341,17 +331,18 @@
                     this.emojiIndex = [];
                     this.emojiIndex.push(value);
                 }
-//                console.log('this.emojiIndex='+this.emojiIndex)
             },
             sendSubCommentData:function(value){
                 let index = this.activeIndex.indexOf(value);
                 this.activeIndex.splice(index,1);
+                this.commentId[value] = ''
                 //value是下标
                 console.log(this.subCommentList[value])
             },
             closeSubComment:function(value){
                 let index = this.activeIndex.indexOf(value);
                 this.activeIndex.splice(index,1);
+                this.commentId[value] = ''
             },
             selectSubEmoji:function(code){
                 //当前下标
@@ -365,8 +356,20 @@
                 //关掉emoji弹出框
                 this.emojiIndex = [];
                 //聚焦一下
-                let num = this.activeIndex.indexOf(index);
-                this.$refs.content[num].focus();
+                this.commentFormState[index] = true
+            },
+            commentLike(index){
+                if(this.comments[index].like){
+                    //点赞过后的  就是取消点赞
+                    this.comments[index].like = false;
+                    this.comments[index].likes_count -= 1
+                    //留下取消点赞的axios的请求
+                }else{
+                    //没有点赞过的  就是确认点赞
+                    this.comments[index].like = true;
+                    this.comments[index].likes_count += 1
+                    //留下添加点赞的axios的请求
+                }
             }
         }
     }
@@ -542,6 +545,18 @@
     .note .post .comment-list .comment .tool-group a{
         color:#969696 !important;
         margin-right:10px;
+    }
+    .note .post .comment-list .comment .tool-group a:first-child:hover i{
+        color:#ea6f5a;
+    }
+    .note .post .comment-list .comment .tool-group a:first-child i.liked{
+             color:#ea6f5a !important;
+    }
+    .note .post .comment-list .comment .tool-group a:first-child:hover span{
+        color:#333;
+    }
+    .note .post .comment-list .comment .tool-group a:first-child span.rel-like{
+        color:#333 !important;
     }
     .note .post .comment-list .comment .tool-group a i{
         margin-right:5px;

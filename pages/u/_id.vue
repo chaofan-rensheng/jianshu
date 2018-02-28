@@ -52,25 +52,25 @@
                         </div>
                     </div>
                     <ul class="person-menu">
-                        <li class="active" @click="name='artical'">
-                            <nuxt-link to="/u/123" @click="aa()">
+                        <li class="active" @click="toggleTab('artical')">
+                            <nuxt-link to="/u/123">
                                 <i class="fa fa-file-text"></i>文章
                             </nuxt-link>
                             <div class="bottomLine"></div>
                         </li>
-                        <li @click="name='dynamic'">
+                        <li @click="toggleTab('dynamic')">
                             <nuxt-link to="/u/123">
                                 <i class="fa fa-bell"></i>动态
                             </nuxt-link>
                             <div class="bottomLine"></div>
                         </li>
-                        <li @click="name='newComments'">
+                        <li @click="toggleTab('newComments')">
                             <nuxt-link to="/u/123">
                                 <i class="fa fa-comments"></i>最新评论
                             </nuxt-link>
                             <div class="bottomLine"></div>
                         </li>
-                        <li @click="name='hot'">
+                        <li  @click="toggleTab('hot')">
                             <nuxt-link to="/u/123">
                                 <i class="fa fa-fire"></i>热门
                             </nuxt-link>
@@ -79,7 +79,7 @@
                     </ul>
                     <div class="list-container">
                         <keep-alive>
-                            <component :is="name"></component>
+                            <component :is="currentTab"></component>
                         </keep-alive>
                     </div>
                 </div>
@@ -146,11 +146,8 @@
     export default{
         data(){
             return{
-                name:'dynamic',
-                name:'newComments',
-                name:'hot',
-                name:'artical',
-                showTextarea:false
+                currentTab:'artical',
+                showTextarea:false,
             }
         },
         components:{
@@ -161,8 +158,8 @@
             hot
         },
         methods:{
-            aa(){
-                console.log('fsdafasdf')
+            toggleTab(tab){
+                this.currentTab = tab
             }
         }
     }

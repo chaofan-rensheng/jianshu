@@ -9,8 +9,8 @@
                     <i class="fa fa-edit"></i>写文章
                 </nuxt-link>
                 <!--登录和注册按钮-->
-                <nuxt-link to="/sign-up" class="btn sign-up">注册</nuxt-link>
-                <nuxt-link to="/sign-in" class="btn sign-in">登录</nuxt-link>
+                <nuxt-link to="/sign-up" class="btn sign-up" style="display: none">注册</nuxt-link>
+                <nuxt-link to="/sign-in" class="btn sign-in" style="display: none">登录</nuxt-link>
                 <!--如果用户登录，那么显示用户头像-->
                 <div style="display:block" class="user"  @mouseover="userShow=true" @mouseleave="userShow=false">
                     <div class="drop-down">

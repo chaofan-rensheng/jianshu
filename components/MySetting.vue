@@ -1,7 +1,7 @@
 <template>
 <div>
      <ul>
-      <li v-for="(setting,index) in settings" :key="index" ref="myset" @click="changeColor(index)">
+      <li v-for="(setting,index) in settings" :key="index" ref="myset">
         <nuxt-link :to="setting.url">
             <div class="setting-icon">
              <i :class="setting.icon"></i>
