@@ -15,7 +15,7 @@
                 <div style="display:block" class="user"  @mouseover="userShow=true" @mouseleave="userShow=false">
                     <div class="drop-down">
                         <nuxt-link class="avatar" to="/">
-                            <img src="../assets/img/touxiang.jpg" alt="">
+                            <img src="../assets/img/my.gif" alt="">
                         </nuxt-link>
                     </div>
                     <div class="drop-menu" v-show="userShow">
@@ -33,7 +33,7 @@
                                 </nuxt-link>
                             </li>
                             <li>
-                                <nuxt-link to="/note_like">
+                                <nuxt-link to="/users/123/like">
                                     <i class="fa fa-heart"></i>
                                     喜欢的文章
                                 </nuxt-link>

@@ -27,7 +27,7 @@
                                 </li>
                                 <li>
                                     <div class="meta-block">
-                                        <nuxt-link to="/users/123/followers">
+                                        <nuxt-link to="/u/123">
                                             <p>4</p>粉丝 <i class="fa fa-angle-right"></i>
                                         </nuxt-link>
                                     </div>
@@ -57,27 +57,15 @@
                         </div>
                     </div>
                     <ul class="person-menu">
-                        <li :class="{active:currentTab == 'artical'}" @click="toggleTab('artical')">
+                        <li :class="{active:currentTab == 'Followers'}" @click="toggleTab('Followers')">
                             <a href="javascript:void(0)">
-                                <i class="fa fa-file-text"></i>文章
+                                关注用户 4
                             </a>
                             <div class="bottomLine"></div>
                         </li>
-                        <li :class="{active:currentTab == 'dynamic'}" @click="toggleTab('dynamic')">
+                        <li :class="{active:currentTab == 'FollowMe'}" @click="toggleTab('FollowMe')">
                             <a href="javascript:void(0)">
-                                <i class="fa fa-bell"></i>动态
-                            </a>
-                            <div class="bottomLine"></div>
-                        </li>
-                        <li :class="{active:currentTab == 'newComments'}" @click="toggleTab('newComments')">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-comments"></i>最新评论
-                            </a>
-                            <div class="bottomLine"></div>
-                        </li>
-                        <li :class="{active:currentTab == 'hot'}" @click="toggleTab('hot')">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-fire"></i>热门
+                                粉丝 6
                             </a>
                             <div class="bottomLine"></div>
                         </li>
@@ -144,14 +132,13 @@
 </template>
 <script>
     import myHeader from '~/components/myHeader'
-    import artical from '~/components/artical'
-    import dynamic from '~/components/dynamic'
-    import newComments from '~/components/newComments'
-    import hot from '~/components/hot'
+    import Followers from '~/components/follow/Followers'
+    import FollowMe from '~/components/follow/FollowMe'
     export default{
+        name:'followers',
         data(){
             return{
-                currentTab:'artical',
+                currentTab:'FollowMe',
                 showTextarea:false,
                 followClass:true,
                 followStyle:true
@@ -159,10 +146,8 @@
         },
         components:{
             myHeader,
-            artical,
-            dynamic,
-            newComments,
-            hot
+            FollowMe,
+            Followers,
         },
         methods:{
             toggleTab(tab){

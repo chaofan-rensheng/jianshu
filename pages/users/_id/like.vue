@@ -6,7 +6,7 @@
                 <div class="col-xs-16 main" style="width:640px;">
                     <div class="main-top">
                         <a class="avatar" href="javascript:void(0)">
-                            <img src="~/assets/img/my.gif" alt="">
+                            <img src="~/assets/img/commend4.jpg" alt="">
                         </a>
                         <a class="commonStyle"  :class="followStyle ? 'beFollow' : 'unBeFollow'"
                            href="javascript:void(0)"  @click="followMe()" @mouseenter="followEnter()" @mouseleave="followLeave()" >
@@ -20,14 +20,14 @@
                             <ul>
                                 <li>
                                     <div class="meta-block">
-                                        <nuxt-link to="/users/123/following">
+                                        <nuxt-link to="/u/123">
                                             <p>6</p>关注 <i class="fa fa-angle-right"></i>
                                         </nuxt-link>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="meta-block">
-                                        <nuxt-link to="/users/123/followers">
+                                        <nuxt-link to="/u/123">
                                             <p>4</p>粉丝 <i class="fa fa-angle-right"></i>
                                         </nuxt-link>
                                     </div>
@@ -57,27 +57,15 @@
                         </div>
                     </div>
                     <ul class="person-menu">
-                        <li :class="{active:currentTab == 'artical'}" @click="toggleTab('artical')">
+                        <li :class="{active:currentTab == 'FollowCollection'}" @click="toggleTab('FollowCollection')">
                             <a href="javascript:void(0)">
-                                <i class="fa fa-file-text"></i>文章
+                                <i class="fa fa-file-text"></i>我关注的专题/文集/连载
                             </a>
                             <div class="bottomLine"></div>
                         </li>
-                        <li :class="{active:currentTab == 'dynamic'}" @click="toggleTab('dynamic')">
+                        <li :class="{active:currentTab == 'LikeArticle'}" @click="toggleTab('LikeArticle')">
                             <a href="javascript:void(0)">
-                                <i class="fa fa-bell"></i>动态
-                            </a>
-                            <div class="bottomLine"></div>
-                        </li>
-                        <li :class="{active:currentTab == 'newComments'}" @click="toggleTab('newComments')">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-comments"></i>最新评论
-                            </a>
-                            <div class="bottomLine"></div>
-                        </li>
-                        <li :class="{active:currentTab == 'hot'}" @click="toggleTab('hot')">
-                            <a href="javascript:void(0)">
-                                <i class="fa fa-fire"></i>热门
+                                <i class="fa fa-bell"></i>我喜欢的文章
                             </a>
                             <div class="bottomLine"></div>
                         </li>
@@ -117,14 +105,14 @@
                     <div>
                         <div>
                             <div class="title">我创建的专题</div>
-                            <nuxt-link to="/collection/new" class="plus">
+                            <nuxt-link to="/collections/new" target="_blank" class="plus">
                                 <i class="fa fa-plus"></i>&nbsp;
                                 <span>新建专题</span>
                             </nuxt-link>
                             <ul class="list">
                                 <li>
-                                    <a href="javascript:void(0)"><img src="~/assets/img/crop.png" alt=""></a>
-                                    <nuxt-link to="/collection/123">面试</nuxt-link>
+                                    <nuxt-link to="/u/123"><img src="~/assets/img/crop.png" alt=""></nuxt-link>
+                                    <nuxt-link to="/u/123">面试</nuxt-link>
                                 </li>
                             </ul>
                         </div>
@@ -132,7 +120,7 @@
                             <div class="title">我的文集</div>
                             <ul class="list">
                                 <li>
-                                    <nuxt-link to="/note/123"><i class="fa fa-book" style="color:#b4b4b4;"></i>记事本</nuxt-link>
+                                    <nuxt-link to="/u/123"><i class="fa fa-book" style="color:#b4b4b4;"></i>记事本</nuxt-link>
                                 </li>
                             </ul>
                         </div>
@@ -144,14 +132,12 @@
 </template>
 <script>
     import myHeader from '~/components/myHeader'
-    import artical from '~/components/artical'
-    import dynamic from '~/components/dynamic'
-    import newComments from '~/components/newComments'
-    import hot from '~/components/hot'
+    import FollowCollection from '~/components/users/FollowCollection'
+    import LikeArticle from '~/components/users/LikeArticle'
     export default{
         data(){
             return{
-                currentTab:'artical',
+                currentTab:'LikeArticle',
                 showTextarea:false,
                 followClass:true,
                 followStyle:true
@@ -159,10 +145,8 @@
         },
         components:{
             myHeader,
-            artical,
-            dynamic,
-            newComments,
-            hot
+            FollowCollection,
+            LikeArticle,
         },
         methods:{
             toggleTab(tab){
