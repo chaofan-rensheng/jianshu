@@ -56,7 +56,7 @@
                             </ul>
                         </div>
                     </div>
-                    <ul class="person-menu">
+                    <ul class="trigger-menu">
                         <li :class="{active:currentTab == 'artical'}" @click="toggleTab('artical')">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-file-text"></i>文章
@@ -82,6 +82,7 @@
                             <div class="bottomLine"></div>
                         </li>
                     </ul>
+
                     <div class="list-container">
                         <keep-alive>
                             <component :is="currentTab"></component>

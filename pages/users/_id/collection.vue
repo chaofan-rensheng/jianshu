@@ -56,7 +56,7 @@
                             </ul>
                         </div>
                     </div>
-                    <ul class="person-menu">
+                    <ul class="trigger-menu">
                         <li :class="{active:currentTab == 'FollowCollection'}" @click="toggleTab('FollowCollection')">
                             <a href="javascript:void(0)">
                                 <i class="fa fa-file-text"></i>我关注的专题/文集/连载

@@ -49,7 +49,7 @@
                             <img src="../assets/img/commend6.jpg" alt="">
                             <span>文学</span>
                         </nuxt-link>
-                        <nuxt-link to="/collection/123" class="more-hot-collection">
+                        <nuxt-link to="/recommend" class="more-hot-collection">
                             更多热门专题
                             <i class="fa fa-chevron-right"></i>
                         </nuxt-link>
