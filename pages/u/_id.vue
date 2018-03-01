@@ -5,9 +5,14 @@
             <div class="row">
                 <div class="col-xs-16 main" style="width:640px;">
                     <div class="main-top">
-                        <nuxt-link class="avatar" to="/u/123">
+                        <a class="avatar" href="javascript:void(0)">
                             <img src="~/assets/img/commend4.jpg" alt="">
-                        </nuxt-link>
+                        </a>
+                        <a class="commonStyle"  :class="followStyle ? 'beFollow' : 'unBeFollow'"
+                           href="javascript:void(0)"  @click="followMe()" @mouseenter="followEnter()" @mouseleave="followLeave()" >
+                            <i class="fa" :class="followClass ? 'fa-plus' : 'fa-check' " ref="followClose"></i>&nbsp;<span ref='followWord'>关注</span>
+                        </a>
+                        <nuxt-link class="easyMessage commonStyle" to="/u/123" >发简信</nuxt-link>
                         <div class="title">
                             <a  class="name" href="#">北纬90度旅行</a>
                         </div>
@@ -52,25 +57,25 @@
                         </div>
                     </div>
                     <ul class="person-menu">
-                        <li class="active" @click="toggleTab('artical')">
+                        <li :class="{active:currentTab == 'artical'}" @click="toggleTab('artical')">
                             <nuxt-link to="/u/123">
                                 <i class="fa fa-file-text"></i>文章
                             </nuxt-link>
                             <div class="bottomLine"></div>
                         </li>
-                        <li @click="toggleTab('dynamic')">
+                        <li :class="{active:currentTab == 'dynamic'}" @click="toggleTab('dynamic')">
                             <nuxt-link to="/u/123">
                                 <i class="fa fa-bell"></i>动态
                             </nuxt-link>
                             <div class="bottomLine"></div>
                         </li>
-                        <li @click="toggleTab('newComments')">
+                        <li :class="{active:currentTab == 'newComments'}" @click="toggleTab('newComments')">
                             <nuxt-link to="/u/123">
                                 <i class="fa fa-comments"></i>最新评论
                             </nuxt-link>
                             <div class="bottomLine"></div>
                         </li>
-                        <li  @click="toggleTab('hot')">
+                        <li :class="{active:currentTab == 'hot'}" @click="toggleTab('hot')">
                             <nuxt-link to="/u/123">
                                 <i class="fa fa-fire"></i>热门
                             </nuxt-link>
@@ -112,7 +117,7 @@
                     <div>
                         <div>
                             <div class="title">我创建的专题</div>
-                            <nuxt-link to="/u/123" class="plus">
+                            <nuxt-link to="/collections/new" target="_blank" class="plus">
                                 <i class="fa fa-plus"></i>&nbsp;
                                 <span>新建专题</span>
                             </nuxt-link>
@@ -148,6 +153,8 @@
             return{
                 currentTab:'artical',
                 showTextarea:false,
+                followClass:true,
+                followStyle:true
             }
         },
         components:{
@@ -160,6 +167,27 @@
         methods:{
             toggleTab(tab){
                 this.currentTab = tab
+            },
+            followMe(){
+                this.followClass = !this.followClass
+                this.followStyle = !this.followStyle
+                if(this.followClass == false){
+                    this.$refs.followWord.innerHTML = '已关注'
+                }else{
+                    this.$refs.followWord.innerHTML = '关注'
+                }
+            },
+            followEnter(){
+                if(this.$refs.followWord.innerHTML == '已关注'){
+                    this.$refs.followWord.innerHTML = '取消关注'
+                    this.$refs.followClose.classList.add('fa-close')
+                }
+            },
+            followLeave(){
+                if(this.$refs.followWord.innerHTML == '取消关注'){
+                    this.$refs.followWord.innerHTML = '已关注'
+                    this.$refs.followClose.classList.remove('fa-close')
+                }
             }
         }
     }

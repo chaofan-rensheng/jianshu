@@ -1,5 +1,22 @@
 <template>
     <div>
+        <div class="comment-placeholder">
+            <div class="author">
+                <div class="avatar"></div>
+                <div class="info">
+                    <div class="name"></div>
+                    <div class="meta"></div>
+                </div>
+            </div>
+            <div class="title"></div>
+            <div class="title animated-delay"></div>
+            <div class="tool-group">
+                <i class="fa fa-thumbs-up"></i>
+                <div class="zan"></div>
+                <i class="fa fa-comment"></i>
+                <div class="like"></div>
+            </div>
+        </div>
         <ul class="note-list">
             <li class="artical">
                 <div class="content">
