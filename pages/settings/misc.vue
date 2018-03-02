@@ -64,10 +64,10 @@ export default {
           this.show=true;
       }
   },
-   mounted(){
-   let dom1=document.querySelector('.aside ul li:nth-of-type(6)');
-   dom1.className="asideActive";
-  },
+//   mounted(){
+//   let dom1=document.querySelector('.aside ul li:nth-of-type(6)');
+//   dom1.className="asideActive";
+//  },
   components:{
       myHeader,
       mySetting

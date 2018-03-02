@@ -24,10 +24,10 @@ import myHeader from "~/components/myHeader";
 import mySetting from "~/components/mySetting";
 export default {
   name:'basic',
-   mounted(){
-   let dom1=document.querySelector('.aside ul li:nth-of-type(4)');
-   dom1.className="asideActive";
-  },
+//   mounted(){
+//   let dom1=document.querySelector('.aside ul li:nth-of-type(4)');
+//   dom1.className="asideActive";
+//  },
   components:{
       myHeader,
       mySetting

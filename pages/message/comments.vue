@@ -13,7 +13,7 @@
                         <li><nuxt-link to="/message/follows">关注</nuxt-link></li>
                     </ul>
                 </div>
-                    <div class="col-xs-16 col-xs-offset-8 main" style="margin-left:55px">
+                    <div class="col-xs-16 col-xs-offset-8 main">
                         <div>
                             <div class="menu">收到的评论</div>
                             <ul class="comment-list">
@@ -96,9 +96,12 @@
     }
 </script>
 <style>
-    .aside{
-        position:flex;
-        top:0;
+    .comments{
+        position: relative;
+    }
+    .comments .aside{
+        position:fixed;
+        top:90px;
         bottom:0;
         width:280px;
         height:500px;
@@ -122,6 +125,7 @@
     /*}*/
     .comments .main {
         width:625px;
+        margin-left:33.3%;
     }
     .comments .main .menu{
         margin-bottom:20px;

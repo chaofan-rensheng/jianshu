@@ -13,7 +13,7 @@
                             <li><nuxt-link to="/message/follows">关注</nuxt-link></li>
                         </ul>
                     </div>
-                    <div class="col-xs-16 col-xs-offset-8 main" style="margin-left:55px;">
+                    <div class="col-xs-16 col-xs-offset-8 main">
                         <div class="menu">全部简信</div>
                         <ul class="jianxin-list">
                             <li>
@@ -45,7 +45,7 @@
                                     <img src="~/assets/img/commend4.jpg" alt="">
                                 </nuxt-link>
                                 <nuxt-link class="name" to="/u/123">简宝玉</nuxt-link>
-                                <nuxt-link class="wrap" to="/u/123">
+                                <nuxt-link class="wrap"  to="/message/chats/123">
                                     <p>  欢迎加入丰富多彩的原创内容社区——简书。有任何疑问（如何投稿，专题主编，签约作者，简叔，简小...</p>
                                 </nuxt-link>
                             </li>
@@ -74,9 +74,12 @@
     }
 </script>
 <style>
+    .chats{
+        position: relative;
+    }
     .chats .aside{
-        position:flex;
-        top:0;
+        position:fixed;
+        top:90px;
         bottom:0;
         width:280px;
         height:500px;
@@ -100,6 +103,7 @@
     /*}*/
     .chats .main{
         width:625px;
+        margin-left:33.3%;
     }
     .chats .main .menu{
         margin-bottom:20px;

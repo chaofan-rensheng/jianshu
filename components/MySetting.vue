@@ -1,7 +1,7 @@
 <template>
 <div>
      <ul>
-      <li v-for="(setting,index) in settings" :key="index" ref="myset">
+      <li v-for="(setting,index) in settings" :key="index" ref="myset" :class="{asideActive:setting.url == path}">
         <nuxt-link :to="setting.url">
             <div class="setting-icon">
              <i :class="setting.icon"></i>
@@ -25,9 +25,12 @@ export default {
                   {url:'/settings/reward-setting',icon:'fa fa-yen',title:'赞赏设置'},
                   {url:'/settings/misc',icon:'fa fa-cog',title:'账号管理'},
                 ],
-                urlArr:[]
+                path:''
             }
         },
+        mounted(){
+            this.path = this.$route.path
+        }
 };
 </script>
 <style scoped>

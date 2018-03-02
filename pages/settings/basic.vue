@@ -119,14 +119,14 @@ import myHeader from "~/components/myHeader";
 import mySetting from "~/components/mySetting";
 export default {
   name: "basic",
-  mounted() {
-    let com = document.querySelector(".aside ul li");
-    com.className = "asideActive";
-  },
+//  mounted() {
+//    let com = document.querySelector(".aside ul li");
+//    com.className = "asideActive";
+//  },
   components: {
     myHeader,
     mySetting
-  },
+  }
 };
 </script>
 <style scoped>

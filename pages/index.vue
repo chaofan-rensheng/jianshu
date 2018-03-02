@@ -221,13 +221,20 @@
                             <img src="../assets/img/5.png" alt="">
                         </nuxt-link>
                     </div>
-                    <nuxt-link  to="/" class="download">
-                        <img src="../assets/img/lianxi.jpg" alt="">
+                    <nuxt-link  to="/" class="download" >
+                        <div @mouseenter="showmy=true" @mouseleave="showmy=false">
+                            <img src="../assets/img/me.jpg" alt="">
+                            <span ref="changeFontColor">联&nbsp; 系&nbsp; 作&nbsp;  者</span>
+                        </div>
                     </nuxt-link>
+                    <div class="popover top" v-if="showmy">
+                        <img src="../assets/img/me.jpg" alt="">
+                        <span class="arrow"></span>
+                    </div>
                     <div class="recommend-author">
                         <div class="title">
                             <span>推荐作者</span>
-                            <a   href="javascript:void(0)" class="page-change"  @click="rotate()"><i  ref="refresh" class="fa fa-refresh"></i>换一批</a>
+                            <a  href="javascript:void(0)" class="page-change"  @click="rotate()"><i  ref="refresh" class="fa fa-refresh"></i>换一批</a>
                         </div>
                         <ul class="list">
                             <li>
@@ -287,7 +294,7 @@
                                 </p>
                             </li>
                         </ul>
-                        <nuxt-link to="/" class="find-more">查看全部 <i class="fa fa-angle-right"></i></nuxt-link>
+                        <nuxt-link to="/recommendAuthor" class="find-more">查看全部 <i class="fa fa-angle-right"></i></nuxt-link>
                     </div>
                 </div>
             </div>
@@ -323,6 +330,7 @@
         data () {
             return {
                 banners: [ '/banner1.jpg', '/banner2.jpg', '/banner3.jpg' ],
+                showmy:false,
                 swiperOption: {
                     autoplay:{
                       dalay:3000,  //切换时间
@@ -348,7 +356,7 @@
             rotate(){
                 this.deg = this.deg + 360
                 this.$refs.refresh.style.transform = `rotate(${this.deg + 360}deg)`
-            }
+            },
         }
     }
 </script>
