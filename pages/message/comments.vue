@@ -6,11 +6,11 @@
                 <div class="row" style="padding:30px 0;">
                     <div class="aside">
                     <ul>
-                        <li><nuxt-link to="/message/comments">评论</nuxt-link></li>
-                        <li><nuxt-link to="/message/chats">简信</nuxt-link></li>
-                        <li><nuxt-link to="/message/requests">投稿请求</nuxt-link></li>
-                        <li><nuxt-link to="/message/likes">喜欢和赞</nuxt-link></li>
-                        <li><nuxt-link to="/message/follows">关注</nuxt-link></li>
+                        <li><nuxt-link to="/message/comments"><i class="fa fa-comment-o"></i>&#x3000;评论</nuxt-link></li>
+                        <li><nuxt-link to="/message/chats"><i class="fa fa-envelope-o"></i>&#x3000;简信</nuxt-link></li>
+                        <li><nuxt-link to="/message/requests"><i class="fa fa-upload"></i>&#x3000;投稿请求</nuxt-link></li>
+                        <li><nuxt-link to="/message/likes"><i class="fa fa-heart-o"></i>&#x3000;喜欢和赞</nuxt-link></li>
+                        <li><nuxt-link to="/message/follows"><i class="fa fa-user-o"></i>&#x3000;关注</nuxt-link></li>
                     </ul>
                 </div>
                     <div class="col-xs-16 col-xs-offset-8 main">
@@ -114,6 +114,9 @@
         padding:10px 25px;
         line-height:30px;
         display: block;
+    }
+    .comments .aside li a i{
+        color:#ea6f5a;
     }
     .comments .aside li:hover{
         background-color:#f0f0f0;

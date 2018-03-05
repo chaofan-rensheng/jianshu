@@ -161,7 +161,7 @@
         }
     }
 </script>
-<style>
+<style scoped>
     .avatar-collection{
         border-radius:50% !important;
     }

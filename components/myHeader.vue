@@ -56,22 +56,22 @@
                 <!--导航-->
                 <div class="my-container">
                     <ul class="nav-list">
-                        <li  class="active">
+                        <li  :class="{active:'' == path}">
                             <nuxt-link to="/">
                                 <i class="fa fa-compass"></i>
                                 <span>发现</span>
                             </nuxt-link>
                         </li>
-                        <li>
-                            <nuxt-link to="/">
+                        <li :class="{active:'subscriptions' == path}">
+                            <nuxt-link to="/subscriptions">
                                 <i class="fa fa-book"></i>
                                 <span>关注</span>
                             </nuxt-link>
                         </li>
-                        <li class="notify"  @mouseover="notifyShow=true" @mouseleave="notifyShow=false">
-                            <nuxt-link to="/">
+                        <li class="notify" :class="{active:'message' == path}" @mouseover="notifyShow=true" @mouseleave="notifyShow=false">
+                            <nuxt-link to="/message/comments">
                                 <i class="fa fa-bell-o"></i>
-                                <span>消息</span>
+                                <span >消息</span>
                             </nuxt-link>
                             <div class="drop-menu" v-show="notifyShow">
                                 <ul>
@@ -129,8 +129,13 @@
             return{
                 userShow:false,
                 notifyShow:false,
-                bgShow:false
+                bgShow:false,
+                path:''
             }
+        },
+        mounted(){
+            this.path = this.$route.path.split('/')[1]
+            console.log(this.path)
         },
         name:'myHeader',  //给组件命名
     }
@@ -292,6 +297,9 @@
     nav .nav-list>li.active{
         color:#ea6f5a;
         background-color:white !important;
+    }
+    nav .nav-list>li.active .drop-menu li{
+        color:#333;
     }
     nav .nav-list>li:hover{
         background-color:#f5f5f5;
